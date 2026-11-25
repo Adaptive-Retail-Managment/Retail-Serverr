@@ -98,9 +98,12 @@ ALTER TABLE "StockTransferLine"
   CHECK (
     "requestedQuantity" > 0 AND
     "dispatchedQuantity" >= 0 AND
+    "dispatchedQuantity" <= "requestedQuantity" AND
     "receivedQuantity" >= 0 AND
+    "receivedQuantity" <= "dispatchedQuantity" AND
     "acceptedQuantity" >= 0 AND
-    "rejectedQuantity" >= 0
+    "rejectedQuantity" >= 0 AND
+    "acceptedQuantity" + "rejectedQuantity" <= "receivedQuantity"
   );
 ```
 
@@ -140,6 +143,14 @@ ALTER TABLE "GoodsReceiptLine"
     "receivedQuantity" >= 0 AND "acceptedQuantity" >= 0 AND
     "rejectedQuantity" >= 0 AND "damagedQuantity" >= 0 AND
     "acceptedQuantity" + "rejectedQuantity" + "damagedQuantity" <= "receivedQuantity"
+  );
+ALTER TABLE "TransferReceiptLine"
+  ADD CONSTRAINT "transfer_receipt_line_quantities_valid"
+  CHECK (
+    "quantityReceived" >= 0 AND
+    "quantityAccepted" >= 0 AND
+    "quantityRejected" >= 0 AND
+    "quantityAccepted" + "quantityRejected" <= "quantityReceived"
   );
 
 ALTER TABLE "ReturnLine"
