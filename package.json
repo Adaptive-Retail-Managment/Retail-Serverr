@@ -1,0 +1,37 @@
+{
+  "name": "retail-server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Adaptive Retail Intelligence Platform — backend server (NestJS modular monolith + PostgreSQL/Prisma).",
+  "license": "UNLICENSED",
+  "packageManager": "pnpm@11.28.13",
+  "engines": {
+    "node": ">=22.12.0",
+    "pnpm": ">=11"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @arp/api dev",
+    "build": "pnpm --filter @arp/api build",
+    "start": "pnpm --filter @arp/api start",
+    "lint": "pnpm -r --if-present lint",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "pnpm test:unit",
+    "test:unit": "pnpm -r --if-present test:unit",
+    "test:e2e": "pnpm --filter @arp/api test:e2e",
+    "test:integration": "pnpm --filter @arp/api test:integration",
+    "test:all": "pnpm test:unit && pnpm test:e2e && pnpm test:integration",
+    "db:up": "docker compose -f infra/docker/compose.dev.yml up -d",
+    "db:down": "docker compose -f infra/docker/compose.dev.yml down",
+    "db:logs": "docker compose -f infra/docker/compose.dev.yml logs -f postgres",
+    "prisma:generate": "pnpm --filter @arp/api prisma:generate",
+    "prisma:validate": "pnpm --filter @arp/api prisma:validate",
+    "setup": "pnpm install && pnpm prisma:generate"
+  },
+  "prettier": "@arp/config/prettier",
+  "devDependencies": {
+    "@arp/config": "workspace:*",
+    "prettier": "3.10.1"
+  }
+}

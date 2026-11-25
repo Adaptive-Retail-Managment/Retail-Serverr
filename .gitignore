@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-electron/
+build/
+*.tsbuildinfo
+
+# Environment files (never commit secrets)
+.env
+.env.*
+!.env.example
+
+# Tests and coverage
+coverage/
+test-results/
+playwright-report/
+
+# Tooling caches
+.cache/
+.eslintcache
+.vite/
+.turbo/
+
+# Local editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Local tooling metadata
+.qoder/
+
+# Electron packaging output
+release/
